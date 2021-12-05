@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  app-db:
+    image: postgres:12.9
+    environment:
+      POSTGRES_PASSWORD: "app123"
+      POSTGRES_DB: app
+      POSTGRES_USER: app      
+    ports:
+      - ${DB_PORT:-5432}:5432
+    volumes:
+    - data:/var/lib/postgresql/data
+  adminer:
+    image: adminer    
+    ports:
+      - ${DB_UI_PORT:-9090}:8080     
+  app-queue:
+    image: rabbitmq:3.9.10-management-alpine
+    ports:
+      - ${RAB_PORT:-5672}:5672
+      - ${RAB_UI:-9091}:15672
+    volumes:
+    - queue:/var/lib/rabbitmq     
+volumes:
+  data:      
+  queue: 

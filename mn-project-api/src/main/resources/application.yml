@@ -1,0 +1,45 @@
+micronaut:
+  application:
+    name: app
+  server:
+    port: ${APP_PORT:25001}
+  security:
+    authentication: bearer
+    endpoints:
+      login:
+        path: "/api/auth/login"
+      logout:
+        path: "/api/auth/logout"
+    token:
+      jwt:
+        bearer:
+          enabled: true
+        signatures:
+          secret:
+            generator:
+              secret: ${JWT_SECRET_GENERATOR:`thisIsJustForDevelopmentG#HVJY#*&F#*LBJJCI`}
+
+datasources:
+  default:
+    url: ${JDBC_URL:`jdbc:postgresql://127.0.0.1:5432/app`}
+    driverClassName: org.postgresql.Driver
+    username: ${JDBC_USERNAME:`app`}
+    password: ${JDBC_PASSWORD:`app123`}
+    schema-generate: NONE
+    dialect: POSTGRES
+
+
+---
+endpoints:
+  flyway:
+    enabled: true
+    sensitive: false
+flyway:
+  datasources:
+    default:
+      enabled: true
+
+app:
+  auth:
+    rootEmail: ${APP_ROOT_EMAIL:`root@fake.mail`}
+    rootStartupPassword: ${APP_ROOT_SECRET:`Yogi123`}
