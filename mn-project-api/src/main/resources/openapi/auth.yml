@@ -1,0 +1,73 @@
+openapi: 3.0.1
+info:
+  title: MN Auth
+  description: MN API
+  version: "1.0"
+paths:
+  /api/auth/login:
+    post:
+      tags:
+        - Security
+      operationId: login
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UsernamePasswordCredentials'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernamePasswordCredentials'
+        required: true
+      responses:
+        "200":
+          description: login 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+  /api/auth/logout:
+    get:
+      tags:
+        - Security
+      operationId: indexGet
+      parameters: []
+      responses:
+        "200":
+          description: indexGet 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+    post:
+      tags:
+        - Security
+      operationId: index
+      parameters: []
+      responses:
+        "200":
+          description: index 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+components:
+  schemas:
+    Object:
+      type: object
+    UsernamePasswordCredentials:
+      required:
+        - password
+        - username
+      type: object
+      properties:
+        username:
+          minLength: 1
+          type: string
+        password:
+          minLength: 1
+          type: string
+        identity:
+          type: string
+        secret:
+          type: string
