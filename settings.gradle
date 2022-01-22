@@ -1,0 +1,4 @@
+rootProject.name = 'mn-project'
+include 'mn-project-api'
+include 'mn-project-mail-service'
+include 'mn-project-sms-service'

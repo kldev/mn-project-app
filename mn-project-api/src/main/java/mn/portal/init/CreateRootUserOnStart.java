@@ -13,6 +13,9 @@ import mn.portal.model.UserCreateDto;
 import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.util.Optional;
+
+import mn.portal.notification.NotificationProducer;
+import mn.portal.notification.dto.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,10 +26,12 @@ public class CreateRootUserOnStart implements ApplicationEventListener<ServiceRe
     private static final Logger LOG = LoggerFactory.getLogger(CreateRootUserOnStart.class);
     private final UserAccountManager userAccountManager;
     private final AppAuthConfiguration appAuthConfiguration;
+    private final NotificationProducer producer;
 
-    public CreateRootUserOnStart(UserAccountManager userAccountManager, AppAuthConfiguration appAuthConfiguration) {
+    public CreateRootUserOnStart(UserAccountManager userAccountManager, AppAuthConfiguration appAuthConfiguration, NotificationProducer producer) {
         this.userAccountManager = userAccountManager;
         this.appAuthConfiguration = appAuthConfiguration;
+        this.producer = producer;
     }
 
     @Transactional
@@ -53,6 +58,7 @@ public class CreateRootUserOnStart implements ApplicationEventListener<ServiceRe
             userCreateDto.setPassword(appAuthConfiguration.getRootStartupPassword());
             userAccountManager.createUser(userCreateDto, Optional.empty());
         }
+
     }
 }
 

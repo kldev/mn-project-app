@@ -47,6 +47,7 @@ datasources:
     schema-generate: NONE
     dialect: POSTGRES
 
+rabbitmq.uri: amqp://${MN_RABBIT_ADDRESS:`localhost`}:5672
 
 ---
 endpoints:

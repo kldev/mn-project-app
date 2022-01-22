@@ -1,0 +1,6 @@
+micronaut:
+  application:
+    name: sms-service
+  server:
+    port: 22023
+rabbitmq.uri: amqp://${MN_RABBIT_ADDRESS:`localhost`}:5672

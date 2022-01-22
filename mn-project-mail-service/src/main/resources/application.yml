@@ -1,0 +1,6 @@
+micronaut:
+  application:
+    name: mail-service
+  server:
+    port: 22021
+rabbitmq.uri: amqp://${MN_RABBIT_ADDRESS:`localhost`}:5672
